@@ -1,0 +1,31 @@
+{
+    "name": "iugodev/chimp-campaigns",
+    "description": "An easy way to tranform models data in MailChimp campaigns for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joaquin Anduano",
+            "email": "joaquin@iugo.com.uy"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/console": "5.*",
+        "illuminate/database": "5.*",
+        "illuminate/events": "5.*",
+        "illuminate/filesystem": "5.*",
+        "illuminate/support": "5.*",
+        "illuminate/routing": "5.*",
+
+        "pacely/mailchimp-apiv3": "^1.0"
+
+
+    },
+
+    "autoload": {
+        "psr-4": {
+            "ChimpCampaigns\\": "src/"
+        }
+    }
+}
