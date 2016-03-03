@@ -46,7 +46,7 @@ class ChimpCampaigns{
         $data = $this->runQuery('campaigns/', $data, "POST");
 
 
-        return $this->createLocalCampaing($data, $template);
+        return $this->createLocalCampaing($data, $template, $extraData);
 
     }
 
@@ -108,20 +108,23 @@ class ChimpCampaigns{
     }
 
 
-    private function createLocalCampaing($data, $template)
+    private function createLocalCampaing($data, $template, $extraData = [])
     {
         $campaign = new MailChimpCampaign();
 
-        return $this->updateLocalCampaing($campaign, $data, $template);
+        return $this->updateLocalCampaing($campaign, $data, $template, $extraData);
     }
 
-    private function updateLocalCampaing(MailChimpCampaign $campaign, $data, $template = null)
+    private function updateLocalCampaing(MailChimpCampaign $campaign, $data, $template = null, $extraData = [])
     {
         $campaign->mail_chimp_id = $data['id'];
         $campaign->status = $data['status'];
         if ($template != null) {
             $campaign->view = $template;
         }
+        $extraData = array_merge($extraData, $campaign->getExtraData());
+        $campaign->extra_data = json_encode($extraData);
+
         $campaign->save();
         return $campaign;
     }
@@ -144,7 +147,7 @@ class ChimpCampaigns{
         $data = array_merge($data, $extraData);
         $campaign = $this->findOrCreate($mailChimpCampaignId);
 
-        $this->updateLocalCampaing($campaign, $data, $template);
+        $this->updateLocalCampaing($campaign, $data, $template, $extraData);
 
         return $this->runQuery('campaigns/' . $mailChimpCampaignId, $data, "PATCH");
     }
