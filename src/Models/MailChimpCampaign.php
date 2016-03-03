@@ -15,7 +15,10 @@ class MailChimpCampaign extends Model
 
     public function getExtraData()
     {
-        return json_decode($this->extra_data);
+        if ($this->extra_data == null) {
+            return [];
+        }
+        return json_decode($this->extra_data, true);
     }
 
     public function addItem(IChimpCampaignItem $item) {

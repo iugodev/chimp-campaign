@@ -122,6 +122,7 @@ class ChimpCampaigns{
         if ($template != null) {
             $campaign->view = $template;
         }
+
         $extraData = array_merge($extraData, $campaign->getExtraData());
         $campaign->extra_data = json_encode($extraData);
 
