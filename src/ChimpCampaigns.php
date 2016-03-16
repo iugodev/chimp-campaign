@@ -20,7 +20,7 @@ class ChimpCampaigns{
         return $this->runQuery('lists/', null, "GET");
     }
 
-    public function addListMember($list_id, $email, $extraData)
+    public function addListMember($list_id, $email, $extraData = [])
     {
         $data['email_address'] = $email;
         $data['status'] = 'subscribed';
